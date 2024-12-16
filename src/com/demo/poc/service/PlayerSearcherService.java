@@ -1,7 +1,7 @@
 package com.demo.poc.service;
 
-import com.demo.poc.dao.PlayerDAO;
-import com.demo.poc.dao.TeamDAO;
+import com.demo.poc.repository.PlayerRepository;
+import com.demo.poc.repository.TeamRepository;
 import com.demo.poc.dto.PlayerDTO;
 import com.demo.poc.mapper.PlayerMapper;
 import com.demo.poc.entity.PlayerEntity;
@@ -9,20 +9,20 @@ import com.demo.poc.entity.TeamEntity;
 
 public class PlayerSearcherService {
 
-  private final PlayerDAO playerDAO;
-  private final TeamDAO teamDAO;
+  private final PlayerRepository playerRepository;
+  private final TeamRepository teamRepository;
   private final PlayerMapper playerMapper;
 
   public PlayerSearcherService() {
-    playerDAO = new PlayerDAO();
-    teamDAO = new TeamDAO();
+    playerRepository = new PlayerRepository();
+    teamRepository = new TeamRepository();
     playerMapper = new PlayerMapper();
   }
 
   public PlayerDTO findById(Long id) {
-    PlayerEntity player = playerDAO.findById(id);
+    PlayerEntity player = playerRepository.findById(id);
     Long teamId = player.getTeamId();
-    TeamEntity team = teamDAO.findById(teamId);
+    TeamEntity team = teamRepository.findById(teamId);
 
     return playerMapper.toDTO(player, team);
   }

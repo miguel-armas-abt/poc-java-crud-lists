@@ -1,4 +1,4 @@
-package com.demo.poc.dao;
+package com.demo.poc.repository;
 
 import com.demo.poc.entity.PlayerEntity;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class PlayerDAO {
+public class PlayerRepository {
 
   private static final PlayerEntity[] PLAYERS = {
       new PlayerEntity(1L, "Kylian Mbappé", "Delantero", 24, 1L),
@@ -19,7 +19,7 @@ public class PlayerDAO {
 
   private List<PlayerEntity> soccerPlayers;
 
-  public PlayerDAO() {
+  public PlayerRepository() {
     soccerPlayers = new ArrayList<>(Arrays.asList(PLAYERS));
   }
 
@@ -61,28 +61,4 @@ public class PlayerDAO {
 
     this.soccerPlayers = modifiedList;
   }
-
-  public void updateById(Long id, PlayerEntity updatedPlayer) {
-    if(updatedPlayer == null)
-      throw new IllegalArgumentException("Player to update must not be null");
-
-    PlayerEntity currentPlayer = this.findById(id);
-
-    List<PlayerEntity> modifiedList = new ArrayList<>();
-
-    for (PlayerEntity player: this.soccerPlayers) {
-      if(!id.equals(player.getId())) {
-        modifiedList.add(player);
-      }
-      else {
-        currentPlayer.setAge(updatedPlayer.getAge() != null ? updatedPlayer.getAge() : currentPlayer.getAge());
-        currentPlayer.setName(updatedPlayer.getName() != null ? updatedPlayer.getName() : currentPlayer.getName());
-        currentPlayer.setPosition(updatedPlayer.getPosition() != null ? updatedPlayer.getPosition() : currentPlayer.getPosition());
-        currentPlayer.setTeamId(updatedPlayer.getTeamId() != null ? updatedPlayer.getTeamId() : currentPlayer.getTeamId());
-        modifiedList.add(currentPlayer);
-      }
-    }
-    this.soccerPlayers = modifiedList;
-  }
-
 }

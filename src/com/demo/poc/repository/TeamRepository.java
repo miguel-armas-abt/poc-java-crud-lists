@@ -1,11 +1,11 @@
-package com.demo.poc.dao;
+package com.demo.poc.repository;
 
 import com.demo.poc.entity.TeamEntity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TeamDAO {
+public class TeamRepository {
 
   private static final TeamEntity[] TEAMS = {
       new TeamEntity(1L, "Real Madrid", "Carlo Ancelotti", "Santiago Bernabéu", "Madrid"),
@@ -15,9 +15,9 @@ public class TeamDAO {
       new TeamEntity(5L, "Bayern Múnich", "Thomas Tuchel", "Allianz Arena", "Múnich")
   };
 
-  private List<TeamEntity> soccerTeams;
+  private final List<TeamEntity> soccerTeams;
 
-  public TeamDAO() {
+  public TeamRepository() {
     soccerTeams = new ArrayList<>(Arrays.asList(TEAMS));
   }
 
